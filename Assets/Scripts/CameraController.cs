@@ -5,14 +5,24 @@ using UnityEngine;
 //make the camera follow the player
 public class CameraController : MonoBehaviour
 {
+	public GameObject gameManager;
+	public GameObject soundManager;
 	private GameObject player;
 	//difference between camera and player transform positions
 	private Vector3 offset;
 
+	public 
+
 
 	void Awake ()
 	{
+		
 		player = GameObject.FindGameObjectWithTag ("Player");
+
+		if (GameManager.instance == null)
+			Instantiate (gameManager);
+		if (SoundManager.instance == null)
+			Instantiate (soundManager);
 	}
 
 	void Start ()
