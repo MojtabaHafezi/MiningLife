@@ -6,6 +6,13 @@ using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
 {
+
+	public GameObject player;
+	private GameObject mainCamera;
+	private CameraController cameraController;
+
+
+
 	[Serializable]
 	public class Count
 	{
@@ -19,8 +26,8 @@ public class BoardManager : MonoBehaviour
 		}
 	}
 
-	public int columns = 8;
-	public int rows = 8;
+	public int columns = 32;
+	public int rows = 32;
 	public Count resourceCount = new Count (1, 5);
 	public GameObject[] floorTiles;
 	public GameObject[] resourceTiles;
@@ -49,6 +56,10 @@ public class BoardManager : MonoBehaviour
 		//setup outer wall around the grid
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
+				//first row to be emptied so that the player can be instantiated there
+				if (y == rows - 1 && (x != -1) && x != columns)
+					continue;
+
 				GameObject toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
 				if (x == -1 || x == columns || y == -1 || y == rows) {
 					toInstantiate = outerWallTile;
@@ -73,11 +84,12 @@ public class BoardManager : MonoBehaviour
 
 	private void InstantiateAtRandom (GameObject[] array, int min, int max)
 	{
-		int count = 2;
+		int count = Random.Range (min, max);
 		for (int i = 0; i < count; i++) {
 			Vector3 randomPos = RandomVector ();
 			GameObject choice = array [Random.Range (0, array.Length)];
-			Instantiate (choice, randomPos, Quaternion.identity);
+			GameObject instance = Instantiate (choice, randomPos, Quaternion.identity);
+			instance.transform.SetParent (boardHolder);
 		}
 	}
 
@@ -86,5 +98,15 @@ public class BoardManager : MonoBehaviour
 		BoardSetup ();
 		InitialiseList ();
 		InstantiateAtRandom (resourceTiles, resourceCount.minimum, resourceCount.maximum);
+		//instantiate player at the top
+		Vector3 newLocation = new Vector3 (Random.Range (0, columns - 1), rows - 1, 0f);
+		Instantiate (player, newLocation, Quaternion.identity);
+		//find camera and position to player - set offset correctly
+		mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
+		newLocation.z = -10;
+		mainCamera.transform.position = newLocation;
+		cameraController = mainCamera.GetComponent<CameraController> ();
+		cameraController.FindPlayer ();
+
 	}
 }

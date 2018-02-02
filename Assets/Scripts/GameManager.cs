@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad (gameObject);
 
 		boardManager = GetComponent<BoardManager> ();
+
 		InitialiseGame ();
+
 	}
 
 	private void InitialiseGame ()

@@ -11,28 +11,26 @@ public class CameraController : MonoBehaviour
 	//difference between camera and player transform positions
 	private Vector3 offset;
 
-	public 
-
-
-	void Awake ()
+	void Start ()
 	{
-		
-		player = GameObject.FindGameObjectWithTag ("Player");
-
 		if (GameManager.instance == null)
 			Instantiate (gameManager);
 		if (SoundManager.instance == null)
 			Instantiate (soundManager);
-	}
-
-	void Start ()
-	{
-		offset = transform.position - player.transform.position;
+		
 	}
 
 	//guaranteed after all items have been processed in update -> player has already moved
 	void LateUpdate ()
 	{
-		transform.position = player.transform.position + offset;
+		if (player != null)
+			transform.position = player.transform.position + offset;
+	}
+
+	public void FindPlayer ()
+	{
+		player = GameObject.FindGameObjectWithTag ("Player");
+		if (player != null)
+			offset = transform.position - player.transform.position;
 	}
 }
