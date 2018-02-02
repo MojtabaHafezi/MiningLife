@@ -1,0 +1,308 @@
+fileFormatVersion: 2
+guid: 8b4a354b33594504e83dcf92a4ff5075
+timeCreated: 1517531287
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: npc_rare_item_vendor__x1_walk_png_1354840072_0
+    21300002: npc_rare_item_vendor__x1_walk_png_1354840072_1
+    21300004: npc_rare_item_vendor__x1_walk_png_1354840072_2
+    21300006: npc_rare_item_vendor__x1_walk_png_1354840072_3
+    21300008: npc_rare_item_vendor__x1_walk_png_1354840072_4
+    21300010: npc_rare_item_vendor__x1_walk_png_1354840072_5
+    21300012: npc_rare_item_vendor__x1_walk_png_1354840072_6
+    21300014: npc_rare_item_vendor__x1_walk_png_1354840072_7
+    21300016: npc_rare_item_vendor__x1_walk_png_1354840072_8
+    21300018: npc_rare_item_vendor__x1_walk_png_1354840072_9
+    21300020: npc_rare_item_vendor__x1_walk_png_1354840072_10
+    21300022: npc_rare_item_vendor__x1_walk_png_1354840072_11
+    21300024: npc_rare_item_vendor__x1_walk_png_1354840072_12
+    21300026: npc_rare_item_vendor__x1_walk_png_1354840072_13
+    21300028: npc_rare_item_vendor__x1_walk_png_1354840072_14
+    21300030: npc_rare_item_vendor__x1_walk_png_1354840072_15
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_0
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 273
+        width: 60
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_1
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 273
+        width: 60
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_2
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 274
+        width: 60
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_3
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 274
+        width: 60
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_4
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 185
+        width: 60
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_5
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 184
+        width: 60
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_6
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 184
+        width: 60
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_7
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 183
+        width: 62
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_8
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 92
+        width: 63
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_9
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 92
+        width: 63
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_10
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 92
+        width: 61
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_11
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 92
+        width: 60
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_12
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 1
+        width: 60
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_13
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 1
+        width: 62
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_14
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 1
+        width: 60
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: npc_rare_item_vendor__x1_walk_png_1354840072_15
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 0
+        width: 60
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
