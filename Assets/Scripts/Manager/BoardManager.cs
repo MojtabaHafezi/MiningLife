@@ -28,7 +28,7 @@ public class BoardManager : MonoBehaviour
 
 	public int columns = 32;
 	public int rows = 32;
-	public Count resourceCount = new Count (1, 5);
+	private Count resourceCount = new Count (5, 15);
 	public GameObject[] floorTiles;
 	public GameObject[] resourceTiles;
 	public GameObject outerWallTile;
@@ -42,8 +42,10 @@ public class BoardManager : MonoBehaviour
 	private void InitialiseList ()
 	{
 		gridPositions.Clear ();
-		for (int x = 1; x < columns - 1; x++) {
-			for (int y = 1; y < rows - 1; y++) {
+		for (int x = 0; x < columns; x++) {
+			for (int y = 0; y < rows; y++) {
+				if (y == 0) //skip first level for player to move
+					continue;
 				gridPositions.Add (new Vector3 (x, y, 0f));
 			}
 		}
@@ -57,17 +59,25 @@ public class BoardManager : MonoBehaviour
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
 				//first row to be emptied so that the player can be instantiated there
-				if (y == rows - 1 && (x != -1) && x != columns)
+				if (y == rows - 1 && (x != -1) && x != columns) {
 					continue;
+				}
 
 				GameObject toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
-				if (x == -1 || x == columns || y == -1 || y == rows) {
-					toInstantiate = outerWallTile;
+				if (gridPositions.Contains (new Vector3 (x, y, 0f))) {
+					//instantiate a gameobject with chosen prefab
+					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity);
+					//set the parent to the boardholder
+					instance.transform.SetParent (boardHolder);
+					gridPositions.Remove (new Vector3 (x, y, 0f));
 				}
-				//instantiate a gameobject with chosen prefab
-				GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity);
-				//set the parent to the boardholder
-				instance.transform.SetParent (boardHolder);
+
+				// outer wall needs to be created
+				if (x == -1 || x == columns || y == rows) { // y==-1 for the lower wall
+					toInstantiate = outerWallTile;
+					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity);
+					instance.transform.SetParent (boardHolder);
+				}
 			}
 		}
 
@@ -95,9 +105,9 @@ public class BoardManager : MonoBehaviour
 
 	public void Initialise ()
 	{
-		BoardSetup ();
 		InitialiseList ();
 		InstantiateAtRandom (resourceTiles, resourceCount.minimum, resourceCount.maximum);
+		BoardSetup ();
 		//instantiate player at the top
 		Vector3 newLocation = new Vector3 (Random.Range (0, columns - 1), rows - 1, 0f);
 		Instantiate (player, newLocation, Quaternion.identity);

@@ -109,17 +109,17 @@ public class Player : MonoBehaviour
 
 
 				if (vertical < 0) {
-					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.2) {
+					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.3) {
 						StartCoroutine (WaitForTime (collision, 1.0f));
 					}
 				
 				} else if (horizontal < 0) {
-					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
 						StartCoroutine (WaitForTime (collision, 1.0f));
 					}
 				
 				} else if (horizontal > 0) {
-					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
 						StartCoroutine (WaitForTime (collision, 1.0f));
 					}
 				}
@@ -129,17 +129,17 @@ public class Player : MonoBehaviour
 			if (collision.gameObject.tag == "Tile") {
 				//what to do if the object is a tile
 				if (vertical < 0) {
-					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.2) {
+					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.3) {
 						StartCoroutine (WaitForTime (collision, 1.0f));
 					}
 
 				} else if (horizontal < 0) {
-					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
 						StartCoroutine (WaitForTime (collision, 1.0f));
 					}
 
 				} else if (horizontal > 0) {
-					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
 						StartCoroutine (WaitForTime (collision, 1.0f));
 					}
 				}
