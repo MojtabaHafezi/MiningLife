@@ -1,5 +1,7 @@
 fileFormatVersion: 2
-guid: b284a6525342f44599e9ce79e37c2d61
+guid: 3d2499de7b146044299bb0e45cdec3ed
+timeCreated: 1517771125
+licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
   fontSize: 16
@@ -7,7 +9,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontNames: []
+  fontName: Big_Bottom_Cartoon
+  fontNames:
+  - Big_Bottom_Cartoon
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
