@@ -105,8 +105,11 @@ public class BoardManager : MonoBehaviour
 
 	public void Initialise ()
 	{
+		//create a list to contain the vector3 positions of a grid
 		InitialiseList ();
+		//generate resources at random locations on the grid and remove available index from the list
 		InstantiateAtRandom (resourceTiles, resourceCount.minimum, resourceCount.maximum);
+		//Rest of the grid is being instantiated with tiles or outer walls respectively
 		BoardSetup ();
 		//instantiate player at the top
 		Vector3 newLocation = new Vector3 (Random.Range (0, columns - 1), rows - 1, 0f);

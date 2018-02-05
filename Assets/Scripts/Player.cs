@@ -88,12 +88,9 @@ public class Player : MonoBehaviour
 		//Keys are set in the InputManager by default
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-
-		//debugging
 		horizontal = moveHorizontal;
 		vertical = moveVertical;
-
-
+	
 		Vector3 pos = this.gameObject.transform.position;
 		Vector3 comparePos = collision.transform.position;
 
@@ -103,7 +100,6 @@ public class Player : MonoBehaviour
 			vertical = 0;
 		if (!isMining) {
 			
-		
 			if (collision.gameObject.tag == "Resource") {
 				//check if mineable 
 
@@ -155,15 +151,4 @@ public class Player : MonoBehaviour
 		collision.gameObject.SetActive (false);
 		isMining = false;
 	}
-
-	/*
-	 * if (vertical < 0 || horizontal < 0 || horizontal > 0) {
-
-
-				StartCoroutine (WaitForTime (collision, 1.0f));
-
-			}
-			*/
-
-
 }
