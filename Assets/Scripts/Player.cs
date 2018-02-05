@@ -14,6 +14,11 @@ public class Player : MonoBehaviour
 	private float currentSpeed = 3;
 	private float currentSpeedNegative = -3;
 	private bool facingRight = true;
+	private bool isMining = false;
+
+	//debugging
+	public float horizontal;
+	public float vertical;
 
 	void Start ()
 	{
@@ -30,6 +35,10 @@ public class Player : MonoBehaviour
 		//Keys are set in the InputManager by default
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
+
+		//debugging
+		horizontal = moveHorizontal;
+		vertical = moveVertical;
 
 		//set speed for walking animation - mathf.abs for positive value only
 		animator.SetFloat ("speed", Mathf.Abs (moveHorizontal));
@@ -73,6 +82,88 @@ public class Player : MonoBehaviour
 	}
 
 
+	void OnCollisionStay2D (Collision2D collision)
+	{
+
+		//Keys are set in the InputManager by default
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveVertical = Input.GetAxis ("Vertical");
+
+		//debugging
+		horizontal = moveHorizontal;
+		vertical = moveVertical;
+
+
+		Vector3 pos = this.gameObject.transform.position;
+		Vector3 comparePos = collision.transform.position;
+
+		if (vertical != 0)
+			horizontal = 0;
+		if (horizontal != 0)
+			vertical = 0;
+		if (!isMining) {
+			
+		
+			if (collision.gameObject.tag == "Resource") {
+				//check if mineable 
+
+
+				if (vertical < 0) {
+					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.2) {
+						StartCoroutine (WaitForTime (collision, 1.0f));
+					}
+				
+				} else if (horizontal < 0) {
+					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+						StartCoroutine (WaitForTime (collision, 1.0f));
+					}
+				
+				} else if (horizontal > 0) {
+					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+						StartCoroutine (WaitForTime (collision, 1.0f));
+					}
+				}
+
+			} 
+
+			if (collision.gameObject.tag == "Tile") {
+				//what to do if the object is a tile
+				if (vertical < 0) {
+					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.2) {
+						StartCoroutine (WaitForTime (collision, 1.0f));
+					}
+
+				} else if (horizontal < 0) {
+					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+						StartCoroutine (WaitForTime (collision, 1.0f));
+					}
+
+				} else if (horizontal > 0) {
+					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.2) {
+						StartCoroutine (WaitForTime (collision, 1.0f));
+					}
+				}
+			}
+		}
+	}
+
+	IEnumerator WaitForTime (Collision2D collision, float time)
+	{
+		//animation etc.
+		isMining = true;
+		yield return new WaitForSeconds (time);
+		collision.gameObject.SetActive (false);
+		isMining = false;
+	}
+
+	/*
+	 * if (vertical < 0 || horizontal < 0 || horizontal > 0) {
+
+
+				StartCoroutine (WaitForTime (collision, 1.0f));
+
+			}
+			*/
 
 
 }
