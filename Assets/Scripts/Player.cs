@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 	//Components
 	private Rigidbody2D rigidBody;
 	private Animator animator;
+	private SoundManager soundManager;
 
 	//Attributes
 	public float horizontalSpeed;
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
 	{
 		rigidBody = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
+		soundManager = GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
 		facingRight = true;
 	}
 
@@ -42,6 +44,8 @@ public class Player : MonoBehaviour
 
 		//set speed for walking animation - mathf.abs for positive value only
 		animator.SetFloat ("speed", Mathf.Abs (moveHorizontal));
+		if (moveHorizontal > 0 || moveHorizontal < 0)
+			soundManager.PlayFootstep ();
 
 		//check for maxSpeed - can be upgraded later
 		newSpeed = moveHorizontal * horizontalSpeed;
