@@ -7,6 +7,11 @@ public class SoundManager : MonoBehaviour
 {
 	public AudioClip walk1;
 	public AudioClip walk2;
+	public AudioClip mine3;
+	public AudioClip mine4;
+	public AudioClip death;
+
+
 	Random rand;
 
 	// for sound effects - need to know which source it is to change the clips
@@ -35,6 +40,7 @@ public class SoundManager : MonoBehaviour
 
 	public void PlayFootstep ()
 	{
+		audioSource.loop = false;
 		int choice = Random.Range (0, 1);
 		switch (choice) {
 		case 0:
@@ -49,5 +55,37 @@ public class SoundManager : MonoBehaviour
 		if (!audioSource.isPlaying) {
 			audioSource.Play ();
 		}
+	}
+
+	public void PlayDeath ()
+	{
+		audioSource.loop = false;
+		audioSource.clip = death;
+		if (!audioSource.isPlaying)
+			audioSource.Play ();
+	}
+
+	public void PlayMine ()
+	{	
+		audioSource.loop = true;
+		int choice = Random.Range (0, 2);
+		switch (choice) {
+		case 0:
+			audioSource.clip = mine4;
+			break;
+		case 1:
+			audioSource.clip = mine3;
+			break;
+		default:
+			break;
+		}
+		if (!audioSource.isPlaying) {
+			audioSource.Play ();
+		}
+	}
+
+	public void StopLoop ()
+	{
+		audioSource.loop = false;
 	}
 }
