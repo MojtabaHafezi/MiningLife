@@ -20,8 +20,13 @@ public class GameManager : MonoBehaviour
 
 		boardManager = GetComponent<BoardManager> ();
 
-		InitialiseGame ();
+		//InitialiseGame ();
 
+	}
+
+	void OnLevelWasLoaded ()
+	{
+		InitialiseGame ();
 	}
 
 	private void InitialiseGame ()
@@ -29,4 +34,43 @@ public class GameManager : MonoBehaviour
 		if (SceneManager.GetActiveScene ().name == "scene_main")
 			boardManager.Initialise ();
 	}
+
+	public void LoadMenuScene ()
+	{
+		StartCoroutine (LoadSceneAsynch ("scene_menu"));
+	}
+
+	public void LoadGameScene ()
+	{
+		StartCoroutine (LoadSceneAsynch ("scene_game"));
+	}
+
+	public void LoadGameOverScene ()
+	{
+		StartCoroutine (LoadSceneAsynch ("scene_gameover"));
+	}
+
+	public void LoadStartScene ()
+	{
+		StartCoroutine (LoadSceneAsynch ("scene_start"));
+	}
+
+	public void QuitApplication ()
+	{
+		Application.Quit ();
+	}
+
+	IEnumerator LoadSceneAsynch (string name)
+	{
+		// The Application loads the Scene in the background at the same time as the current Scene.
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync (name);
+
+		//Wait until the last operation fully loads to return anything
+		while (!asyncLoad.isDone) {
+			yield return null;
+		}
+	}
+
+
+
 }

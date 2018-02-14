@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
 	public AudioClip walk2;
 	public AudioClip mine3;
 	public AudioClip mine4;
+	public AudioClip menu;
 	public AudioClip death;
 
 
@@ -87,5 +88,13 @@ public class SoundManager : MonoBehaviour
 	public void StopLoop ()
 	{
 		audioSource.loop = false;
+	}
+
+	public void PlayMenu ()
+	{
+		audioSource.clip = menu;
+		if (!audioSource.isPlaying) {
+			audioSource.Play ();
+		}
 	}
 }
