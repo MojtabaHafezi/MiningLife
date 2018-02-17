@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
 		boardManager = GetComponent<BoardManager> ();
 
-		//InitialiseGame ();
+		InitialiseGame ();
 
 	}
 
@@ -55,12 +55,24 @@ public class GameManager : MonoBehaviour
 		StartCoroutine (LoadSceneAsynch ("scene_start"));
 	}
 
+	public void LoadShopScene ()
+	{
+		StartCoroutine (LoadSceneAsynch ("scene_shop"));
+
+	}
+
+	public void LoadGuildScene ()
+	{
+		StartCoroutine (LoadSceneAsynch ("scene_guild"));
+
+	}
+
 	public void QuitApplication ()
 	{
 		Application.Quit ();
 	}
 
-	IEnumerator LoadSceneAsynch (string name)
+	public IEnumerator LoadSceneAsynch (string name)
 	{
 		// The Application loads the Scene in the background at the same time as the current Scene.
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync (name);
@@ -71,6 +83,17 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	//TODO
+	public void SaveGameData ()
+	{
+		
+	}
+
+	//TODO
+	public void LoadGameData ()
+	{
+		
+	}
 
 
 }

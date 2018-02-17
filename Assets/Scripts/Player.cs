@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
 	void Update ()
 	{
+
 	}
 
 	//fixedupdate is called just before performing physic calculations -> movement comes here (no Time.deltatime)
