@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadGameScene ()
 	{
-		StartCoroutine (LoadSceneAsynch ("scene_game"));
+		SceneManager.LoadScene ("scene_main");
 	}
 
 	public void LoadGameOverScene ()
