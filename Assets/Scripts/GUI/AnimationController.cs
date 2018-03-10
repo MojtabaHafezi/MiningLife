@@ -12,12 +12,12 @@ public class AnimationController : MonoBehaviour
 	{
 		animator = GetComponent<Animator> ();
 		slide = false;
-		animator.SetBool ("slide", slide);
+		animator.SetBool (CONSTANTS.SLIDE, slide);
 	}
 
 	public void SetSlideParameter ()
 	{
 		slide = !slide;
-		animator.SetBool ("slide", slide);
+		animator.SetBool (CONSTANTS.SLIDE, slide);
 	}
 }

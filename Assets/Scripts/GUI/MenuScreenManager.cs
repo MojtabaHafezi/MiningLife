@@ -42,8 +42,12 @@ public class MenuScreenManager : MonoBehaviour
 
 	void Start ()
 	{
+		gameManager = GameManager.instance;
+		soundManager = SoundManager.instance;
+		/*
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		soundManager = GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
+		*/
 		SetButtonListeners ();
 	}
 

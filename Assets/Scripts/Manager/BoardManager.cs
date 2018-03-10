@@ -27,7 +27,7 @@ public class BoardManager : MonoBehaviour
 	}
 
 	public int columns = 32;
-	public int rows = 32;
+	public int rows = 8;
 	private Count resourceCount = new Count (5, 15);
 	public GameObject[] floorTiles;
 	public GameObject[] resourceTiles;
@@ -54,7 +54,7 @@ public class BoardManager : MonoBehaviour
 	private void BoardSetup ()
 	{
 		//instantiate new GameObject and set the transform
-		boardHolder = new GameObject ("Board").transform;
+		boardHolder = new GameObject (CONSTANTS.BOARD).transform;
 		//setup outer wall around the grid
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {

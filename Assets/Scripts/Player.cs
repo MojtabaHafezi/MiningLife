@@ -9,13 +9,21 @@ public class Player : MonoBehaviour
 	private Animator animator;
 	private SoundManager soundManager;
 
-	//Attributes
+	//Attributes for movement
 	public float horizontalSpeed;
 	public float verticalSpeed;
 	private float currentSpeed = 3;
 	private float currentSpeedNegative = -3;
 	private bool facingRight = true;
 	private bool isMining = false;
+
+	//Attributes for gameplay
+	public long currency { get; protected set; }
+
+	public int stamina{ get; protected set; }
+
+	public int efficiency { get; protected set; }
+
 
 	//attributes to check if the player is falling
 	public bool isFalling = false;
@@ -28,9 +36,17 @@ public class Player : MonoBehaviour
 	{
 		rigidBody = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
-		soundManager = GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
+
+		if (soundManager == null)
+			soundManager = SoundManager.instance;
 		facingRight = true;
 		isFalling = false;
+
+		//TODO: LOAD DATA
+
+		stamina = 100;
+		efficiency = 1;
+
 
 
 	}
@@ -123,58 +139,112 @@ public class Player : MonoBehaviour
 			if (horizontal != 0)
 				vertical = 0;
 	
-			if (collision.gameObject.tag == "Resource") {
-				//check if mineable 
-
-				// the player should only mine at specific points -> prevent mining at edge eg.
+		
+			if (collision.gameObject.tag == CONSTANTS.RESOURCE) {
+				//what to do if the object is a tile - check if minable
+				float durationToWait;
+				int drainStamina;
 				if (vertical < 0) {
 					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.3) {
-						StartCoroutine (WaitForTime (collision, 1.0f));
+						durationToWait = checkTimeCalculation (collision);
+						drainStamina = checkStaminaDrain (collision);
+						reduceStaminaBy (drainStamina);
+						AddToInventory (collision);
+						StartCoroutine (WaitForTime (collision, durationToWait));
 					}
-				
+
 				} else if (horizontal < 0) {
 					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
-						StartCoroutine (WaitForTime (collision, 1.0f));
+						durationToWait = checkTimeCalculation (collision);
+						drainStamina = checkStaminaDrain (collision);
+						reduceStaminaBy (drainStamina);
+						AddToInventory (collision);
+						StartCoroutine (WaitForTime (collision, durationToWait));
 					}
-				
+
 				} else if (horizontal > 0) {
 					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
-						StartCoroutine (WaitForTime (collision, 1.0f));
+						durationToWait = checkTimeCalculation (collision);
+						drainStamina = checkStaminaDrain (collision);
+						reduceStaminaBy (drainStamina);
+						AddToInventory (collision);
+						StartCoroutine (WaitForTime (collision, durationToWait));
 					}
 				}
+			}
 
-			} 
-
-			if (collision.gameObject.tag == "Tile") {
-				//what to do if the object is a tile
+			if (collision.gameObject.tag == CONSTANTS.TILE) {
+				//what to do if the object is a tile - check if minable
+				float durationToWait;
+				int drainStamina;
 				if (vertical < 0) {
 					if (comparePos.y < pos.y && Mathf.Abs (comparePos.x - pos.x) < 0.3) {
-						StartCoroutine (WaitForTime (collision, 1.0f));
+						durationToWait = checkTimeCalculation (collision);
+						drainStamina = checkStaminaDrain (collision);
+						reduceStaminaBy (drainStamina);
+						StartCoroutine (WaitForTime (collision, durationToWait));
 					}
 
 				} else if (horizontal < 0) {
 					if (comparePos.x < pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
-						StartCoroutine (WaitForTime (collision, 1.0f));
+						durationToWait = checkTimeCalculation (collision);
+						drainStamina = checkStaminaDrain (collision);
+						reduceStaminaBy (drainStamina);
+						StartCoroutine (WaitForTime (collision, durationToWait));
 					}
 
 				} else if (horizontal > 0) {
 					if (comparePos.x > pos.x && Mathf.Abs (comparePos.y - pos.y) < 0.3) {
-						StartCoroutine (WaitForTime (collision, 1.0f));
+						durationToWait = checkTimeCalculation (collision);
+						drainStamina = checkStaminaDrain (collision);
+						reduceStaminaBy (drainStamina);
+						StartCoroutine (WaitForTime (collision, durationToWait));
 					}
 				}
 			}
 		}
 	}
 
+	private float checkTimeCalculation (Collision2D collision)
+	{
+		return collision.gameObject.GetComponent<BasicTile> ().calculateTime (this.efficiency);
+
+	}
+
+	private int checkStaminaDrain (Collision2D collision)
+	{
+		return collision.gameObject.GetComponent<BasicTile> ().health;
+	}
+
+	private void reduceStaminaBy (int amount)
+	{
+		if (amount >= 0) {
+			this.stamina -= amount;
+			if (this.stamina <= 0)
+				this.stamina = 0;
+		}
+
+	}
+
+	private void AddToInventory (Collision2D collision)
+	{
+		//TODO: ADD TO INVENTORY
+		Debug.Log ("ADDED TO INVENTORY");
+	}
+
 	IEnumerator WaitForTime (Collision2D collision, float time)
 	{
-		//animation etc.
+		Debug.Log ("Stamina: " + stamina);
+		Debug.Log ("Time to mine: " + time);
+		//TODO: animation etc.
+
 		//Play sound and stop animations
 		soundManager.PlayMine ();
 		animator.SetFloat ("speed", 0f);
 		//player is mining -> boolean prevents for other activities
 		isMining = true;
 		yield return new WaitForSeconds (time);
+		//TODO: animation?
 		collision.gameObject.SetActive (false);
 		isMining = false;
 		soundManager.StopLoop ();

@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 	//difference between camera and player transform positions
 	private Vector3 offset;
 
-	void Start ()
+	void Awake ()
 	{
 		if (GameManager.instance == null)
 			Instantiate (gameManager);
@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
 
 	public void FindPlayer ()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player");
+		player = GameObject.FindGameObjectWithTag (CONSTANTS.PLAYER);
 		if (player != null)
 			offset = transform.position - player.transform.position;
 	}

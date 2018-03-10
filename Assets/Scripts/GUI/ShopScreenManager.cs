@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ShopScreenManager : MonoBehaviour
 {
-
-
 	public Button buyButton;
 	public Button sellButton;
 	public Button exitButton;
@@ -15,8 +13,12 @@ public class ShopScreenManager : MonoBehaviour
 
 	void Start ()
 	{
+		gameManager = GameManager.instance;
+		soundManager = SoundManager.instance;
+		/*
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		soundManager = GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
+		*/
 		SetButtonListeners ();
 	}
 	//add the listeners to the buttons manually

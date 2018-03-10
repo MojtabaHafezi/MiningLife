@@ -31,39 +31,39 @@ public class GameManager : MonoBehaviour
 
 	private void InitialiseGame ()
 	{
-		if (SceneManager.GetActiveScene ().name == "scene_main")
-			boardManager.Initialise ();
+		if (SceneManager.GetActiveScene ().name == CONSTANTS.MAINSCENE)
+			instance.boardManager.Initialise ();
 	}
 
 	public void LoadMenuScene ()
 	{
-		StartCoroutine (LoadSceneAsynch ("scene_menu"));
+		instance.StartCoroutine (LoadSceneAsynch (CONSTANTS.MENUSCENE));
 	}
 
 	public void LoadGameScene ()
 	{
-		SceneManager.LoadScene ("scene_main");
+		SceneManager.LoadScene (CONSTANTS.MAINSCENE);
 	}
 
 	public void LoadGameOverScene ()
 	{
-		StartCoroutine (LoadSceneAsynch ("scene_gameover"));
+		instance.StartCoroutine (LoadSceneAsynch (CONSTANTS.GAMEOVERSCENE));
 	}
 
 	public void LoadStartScene ()
 	{
-		StartCoroutine (LoadSceneAsynch ("scene_start"));
+		instance.StartCoroutine (LoadSceneAsynch (CONSTANTS.STARTSCENE));
 	}
 
 	public void LoadShopScene ()
 	{
-		StartCoroutine (LoadSceneAsynch ("scene_shop"));
+		instance.StartCoroutine (LoadSceneAsynch (CONSTANTS.SHOPSCENE));
 
 	}
 
 	public void LoadGuildScene ()
 	{
-		StartCoroutine (LoadSceneAsynch ("scene_guild"));
+		instance.StartCoroutine (LoadSceneAsynch (CONSTANTS.GUILDSCENE));
 
 	}
 

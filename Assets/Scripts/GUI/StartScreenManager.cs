@@ -15,8 +15,12 @@ public class StartScreenManager : MonoBehaviour
 
 	void Start ()
 	{
+		gameManager = GameManager.instance;
+		soundManager = SoundManager.instance;
+		/*
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		soundManager = GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
+		*/
 		SetButtonListeners ();
 	}
 	//add the listeners to the buttons manually
