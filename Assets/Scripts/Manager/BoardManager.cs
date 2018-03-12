@@ -115,7 +115,7 @@ public class BoardManager : MonoBehaviour
 		Vector3 newLocation = new Vector3 (Random.Range (0, columns - 1), rows - 1, 0f);
 		Instantiate (player, newLocation, Quaternion.identity);
 		//find camera and position to player - set offset correctly
-		mainCamera = GameObject.FindGameObjectWithTag ("MainCamera");
+		mainCamera = GameObject.FindGameObjectWithTag (CONSTANTS.MAINCAMERA);
 		newLocation.z = -10;
 		mainCamera.transform.position = newLocation;
 		cameraController = mainCamera.GetComponent<CameraController> ();

@@ -47,13 +47,6 @@ public class Player : MonoBehaviour
 		stamina = 100;
 		efficiency = 1;
 
-
-
-	}
-
-	void Update ()
-	{
-
 	}
 
 	//fixedupdate is called just before performing physic calculations -> movement comes here (no Time.deltatime)
