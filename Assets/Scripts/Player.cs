@@ -217,12 +217,19 @@ public class Player : MonoBehaviour
 
 	private void reduceStaminaBy (int amount)
 	{
-		if (amount >= 0) {
-			this.stamina -= amount;
-			if (this.stamina <= 0)
-				this.stamina = 0;
 
-			gameManager.stamina = this.stamina;
+		if (amount >= 0) {
+			if (this.stamina > 0) {
+				this.stamina -= amount;
+				if (this.stamina <= 0)
+					this.stamina = 0;
+
+				gameManager.stamina = this.stamina;
+				
+			} else {
+				//TODO: STAMINA IS OUT -> TELEPORT TO CITY, SHOW COSTS
+			}
+		
 		}
 
 	}

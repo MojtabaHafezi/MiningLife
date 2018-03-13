@@ -52,8 +52,8 @@ public class ContentFiller : MonoBehaviour
 			Button[] buttons = panel.GetComponentsInChildren<Button> ();
 			dropButtons.Add (buttons);
 		}
-		capacityText.text = "Backpack: " + gameManager.inventory.currentTotal + " / " + gameManager.inventory.capacity;
-		currencyText.text = "Wealth: " + gameManager.currency;
+		capacityText.text = CONSTANTS.BACKPACK + gameManager.inventory.currentTotal + " / " + gameManager.inventory.capacity;
+		currencyText.text = CONSTANTS.WEALTH + gameManager.currency;
 
 	}
 

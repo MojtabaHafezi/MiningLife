@@ -25,6 +25,8 @@ public class CONSTANTS
 	public const string RESOURCE = "Resource";
 	public const string TILE = "Tile";
 	public const int MAXITEMS = 7;
+	public const string BACKPACK = "Backpack: ";
+	public const string WEALTH = "Wealth: ";
 
 	//Item names
 	public const string COAL = "Coal";
