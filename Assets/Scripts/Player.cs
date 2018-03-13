@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 	private Rigidbody2D rigidBody;
 	private Animator animator;
 	private SoundManager soundManager;
+	private GameManager gameManager;
+	private Inventory inventory;
 
 	//Attributes for movement
 	public float horizontalSpeed;
@@ -39,6 +41,10 @@ public class Player : MonoBehaviour
 
 		if (soundManager == null)
 			soundManager = SoundManager.instance;
+		if (gameManager == null)
+			gameManager = GameManager.instance;
+		
+
 		facingRight = true;
 		isFalling = false;
 
@@ -46,7 +52,7 @@ public class Player : MonoBehaviour
 
 		stamina = 100;
 		efficiency = 1;
-
+	
 	}
 
 	//fixedupdate is called just before performing physic calculations -> movement comes here (no Time.deltatime)
@@ -222,7 +228,11 @@ public class Player : MonoBehaviour
 	private void AddToInventory (Collision2D collision)
 	{
 		//TODO: ADD TO INVENTORY
-		Debug.Log ("ADDED TO INVENTORY");
+
+		gameManager.inventory.AddToList (collision.gameObject.GetComponent<BasicTile> ().id);
+		Debug.Log (gameManager.inventory.ToString ());
+	
+
 	}
 
 	IEnumerator WaitForTime (Collision2D collision, float time)

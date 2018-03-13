@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance = null;
 
 	private BoardManager boardManager;
+	public Inventory inventory;
 
 	void Awake ()
 	{
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad (gameObject);
 
 		boardManager = GetComponent<BoardManager> ();
-
+		inventory = new Inventory (CONSTANTS.MAXITEMS);
 		InitialiseGame ();
 
 	}
@@ -86,13 +87,13 @@ public class GameManager : MonoBehaviour
 	//TODO
 	public void SaveGameData ()
 	{
-		
+		inventory.SaveData ();
 	}
 
 	//TODO
 	public void LoadGameData ()
 	{
-		
+		inventory.LoadData ();
 	}
 
 

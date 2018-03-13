@@ -8,6 +8,10 @@ public class BasicTile: MonoBehaviour
 
 	public long value { get; protected set; }
 
+	public int id { get; protected set; }
+
+	public string name { get; protected set; }
+
 	public int health{ get; protected set; }
 
 	public float difficulty{ get; protected set; }
@@ -30,4 +34,5 @@ public class BasicTile: MonoBehaviour
 
 		return duration;
 	}
+		
 }

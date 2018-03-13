@@ -12,5 +12,7 @@ public class TileIron : BasicTile
 		difficulty = 6f;
 		minTime = 1f;
 		maxTime = 4f;
+		id = CONSTANTS.IRON_ID;
+		name = CONSTANTS.IRON;
 	}
 }
