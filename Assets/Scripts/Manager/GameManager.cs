@@ -8,6 +8,13 @@ public class GameManager : MonoBehaviour
 	//Singleton pattern
 	public static GameManager instance = null;
 
+	//Attributes for player
+	public long currency { get; set; }
+
+	public int stamina{ get; set; }
+
+	public int efficiency { get; set; }
+
 	private BoardManager boardManager;
 	public Inventory inventory;
 
@@ -22,6 +29,7 @@ public class GameManager : MonoBehaviour
 		boardManager = GetComponent<BoardManager> ();
 		inventory = new Inventory (CONSTANTS.MAXITEMS);
 		InitialiseGame ();
+		LoadGameData ();
 
 	}
 
@@ -93,6 +101,10 @@ public class GameManager : MonoBehaviour
 	//TODO
 	public void LoadGameData ()
 	{
+		//TODO: load data for player
+		stamina = 100;
+		currency = 0;
+		efficiency = 0;
 		inventory.LoadData ();
 	}
 

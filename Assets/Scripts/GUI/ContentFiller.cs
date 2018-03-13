@@ -8,8 +8,9 @@ public class ContentFiller : MonoBehaviour
 {
 	//Prefab to be initialised in the content for the scrollview
 	public GameObject itemPanel;
-	//Text for the backpack capacity
+	//Text for the backpack capacity and amount of currency
 	public Text capacityText;
+	public Text currencyText;
 	//Array of sprites for the individual resources
 	public Sprite[] imageArrays = new Sprite[CONSTANTS.MAXITEMS];
 	//Array of texts for each resource's text.
@@ -17,6 +18,7 @@ public class ContentFiller : MonoBehaviour
 	//List of button array: Since the itemPanel has 2 buttons in it with 2 different
 	//methods - this was implemented. See the SetBUttonListener for more details
 	private List<Button[]> dropButtons = new List<Button[]> (CONSTANTS.MAXITEMS);
+
 
 
 	private GameManager gameManager;
@@ -51,7 +53,7 @@ public class ContentFiller : MonoBehaviour
 			dropButtons.Add (buttons);
 		}
 		capacityText.text = "Backpack: " + gameManager.inventory.currentTotal + " / " + gameManager.inventory.capacity;
-	
+		currencyText.text = "Wealth: " + gameManager.currency;
 
 	}
 

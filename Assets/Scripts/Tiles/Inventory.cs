@@ -34,7 +34,6 @@ public class Inventory
 		if (itemList [id] > 0) {
 			itemList [id] -= 1;
 			currentTotal -= 1;
-			capacity += 1;
 			SaveData ();
 		}
 
@@ -42,7 +41,6 @@ public class Inventory
 
 	public void ReduceCompleteFromList (int id)
 	{
-		capacity += itemList [id];
 		currentTotal -= itemList [id];
 		itemList [id] = 0;
 		SaveData ();
@@ -50,10 +48,9 @@ public class Inventory
 
 	public void AddToList (int id)
 	{
-		if (capacity > 0) {
+		if (currentTotal < capacity) {
 			itemList [id] += 1;
 			currentTotal += 1;
-			capacity -= 1;
 			SaveData ();
 		} else {
 			Debug.Log ("SHOW GUI: NOSPACE IN BACKPACK");

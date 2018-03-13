@@ -49,9 +49,9 @@ public class Player : MonoBehaviour
 		isFalling = false;
 
 		//TODO: LOAD DATA
-
-		stamina = 100;
-		efficiency = 1;
+		stamina = gameManager.stamina;
+		currency = gameManager.currency;
+		efficiency = gameManager.efficiency;
 	
 	}
 
@@ -221,6 +221,8 @@ public class Player : MonoBehaviour
 			this.stamina -= amount;
 			if (this.stamina <= 0)
 				this.stamina = 0;
+
+			gameManager.stamina = this.stamina;
 		}
 
 	}
