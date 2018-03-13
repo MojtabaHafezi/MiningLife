@@ -31,7 +31,7 @@ public class Inventory
 
 	public void ReduceFromList (int id)
 	{
-		if (itemList [id] >= 0) {
+		if (itemList [id] > 0) {
 			itemList [id] -= 1;
 			currentTotal -= 1;
 			capacity += 1;
@@ -50,7 +50,7 @@ public class Inventory
 
 	public void AddToList (int id)
 	{
-		if (capacity >= 0) {
+		if (capacity > 0) {
 			itemList [id] += 1;
 			currentTotal += 1;
 			capacity -= 1;
