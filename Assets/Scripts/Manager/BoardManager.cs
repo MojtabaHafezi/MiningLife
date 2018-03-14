@@ -29,9 +29,33 @@ public class BoardManager : MonoBehaviour
 
 	private int columns = 32;
 	private int rows = 10;
-	private Count coalCount = new Count (10, 20);
+	//Dirt tile objects
 	public GameObject[] floorTiles;
+	//Stone tiles + lava
+	public GameObject[] greyStoneTiles;
+	public GameObject[] redStoneTiles;
+	//resources and their corresponding occurence rate
 	public GameObject[] coalTiles;
+	//Resources and their corresponding amount to spawn for each instance
+	private Count coalCount = new Count (5, 10);
+	public GameObject[] ironTiles;
+	private Count ironCount = new Count (4, 8);
+	public GameObject[] silverTiles;
+	private Count silverCount = new Count (2, 6);
+	public GameObject[] goldTiles;
+	private Count goldCount = new Count (1, 4);
+	public GameObject[] emeraldTiles;
+	private Count emeraldCount = new Count (0, 3);
+	public GameObject[] rubyTiles;
+	private Count rubyCount = new Count (0, 2);
+	public GameObject[] diamondTiles;
+	private Count diamondCount = new Count (0, 1);
+
+
+
+
+
+
 	public GameObject outerWallTile;
 
 	//to child child the generated prefabs
@@ -43,7 +67,12 @@ public class BoardManager : MonoBehaviour
 	//Initialise the grid
 	private void InitialiseList ()
 	{
+		rows = 10;
+		//instantiate new GameObject and set the transform
+		boardHolder = new GameObject (CONSTANTS.BOARD).transform;
+		//Clear the lists
 		gridPositions.Clear ();
+		objects.Clear ();
 		for (int x = 0; x < columns; x++) {
 			for (int y = 0; y < rows; y++) {
 				if (y == rows - 1) //skip first level for player to move
@@ -55,8 +84,6 @@ public class BoardManager : MonoBehaviour
 
 	private void BoardSetup ()
 	{
-		//instantiate new GameObject and set the transform
-		boardHolder = new GameObject (CONSTANTS.BOARD).transform;
 		//setup outer wall around the grid
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = -1; y < rows + 1; y++) {
@@ -77,7 +104,7 @@ public class BoardManager : MonoBehaviour
 				}
 
 				// outer wall needs to be created
-				if (x == -1 || x == columns || y == rows) { // y==-1 for the lower wall
+				if (x == -1 || x == columns || y == rows) {
 					toInstantiate = outerWallTile;
 					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity);
 					objects.Add (instance);
@@ -108,6 +135,7 @@ public class BoardManager : MonoBehaviour
 			GameObject instance = Instantiate (choice, randomPos, Quaternion.identity);
 			objects.Add (instance);
 			instance.transform.SetParent (boardHolder);
+
 		}
 	}
 
@@ -116,7 +144,7 @@ public class BoardManager : MonoBehaviour
 		//create a list to contain the vector3 positions of a grid
 		InitialiseList ();
 		//generate resources at random locations on the grid and remove available index from the list
-		InstantiateAtRandom (coalTiles, coalCount.minimum, coalCount.maximum);
+		InstantiateRandomResources ();
 		//Rest of the grid is being instantiated with tiles or outer walls respectively
 		BoardSetup ();
 		//instantiate player at the top
@@ -131,39 +159,85 @@ public class BoardManager : MonoBehaviour
 		rows = 0;
 	}
 
-
+	// Create infinite level
 	public void AddToList ()
 	{
-		int beginRow = rows;
-		rows -= 4;
+		gridPositions.Clear ();
+		int beginRow = rows - 1;
+		rows -= CONSTANTS.TILESTOSPAWN;
 
 		for (int x = 0; x < columns; x++) {
-			for (int y = beginRow; y > rows; y--) {
+			for (int y = beginRow; y >= rows; y--) {
 				gridPositions.Add (new Vector3 (x, y, 0f));
 			}
 		}
 
-		//TODO: Add random resources, depending on depth
-
+		//Each resource has its own occurence rate and if you go deeper -> higher probability
+		InstantiateRandomResources ();
 		//add the tiles to the board for all the empty positions
 		TileSetUp (beginRow, rows);
-
-
+		//remove old objects from scene as quick as new ones appear
 		DestroyOldObjects ();
 
 	}
-	//destroy old objects the player wont see anymore
-	private void DestroyOldObjects ()
+
+	//Checks if occurence is available and instantiates the resources with the current random count
+	private void InstantiateRandomResources ()
 	{
-		if (rows < -20) {
+		float depth = rows;
+		float bonus = (float)(Mathf.Abs (depth) / 10f);
 
-			for (int i = 0; i < 128; i++) {
-				Destroy (objects [i]);
-				objects.Remove (objects [i]);
-			}
+		//generate resources at random locations on the grid and remove available index from the list
+		InstantiateAtRandom (coalTiles, coalCount.minimum, coalCount.maximum);
 
-
+		//Iron: 75% 
+		if (ThrowDice (75, 2 * bonus)) {
+			InstantiateAtRandom (ironTiles, ironCount.minimum, ironCount.maximum);
 		}
+
+		//Silver: 45% 
+		if (ThrowDice (45, 2 * bonus)) {
+			InstantiateAtRandom (silverTiles, silverCount.minimum, silverCount.maximum);
+		}
+
+		//Gold: 15% 
+		if (ThrowDice (15, 2 * bonus)) {
+			InstantiateAtRandom (goldTiles, goldCount.minimum, goldCount.maximum);
+		}
+
+		//Emerald: 5% 
+		if (ThrowDiceValuable (5, bonus)) {
+			InstantiateAtRandom (emeraldTiles, emeraldCount.minimum, emeraldCount.maximum);
+		}
+
+		//Ruby: 2.5% 
+		if (ThrowDiceValuable (2.5f, bonus)) {
+			InstantiateAtRandom (rubyTiles, rubyCount.minimum, rubyCount.maximum);
+		}
+
+		//Diamond: 0.5% 
+		if (ThrowDiceValuable (0.5f, bonus)) {
+			InstantiateAtRandom (diamondTiles, diamondCount.minimum, diamondCount.maximum);
+		}
+	}
+
+	//helper method - like a dice throw -takes in limit and a bonus from depth of dungeon
+	private Boolean ThrowDiceValuable (float limit, float bonus)
+	{
+		float random = Random.Range (0f, 100f);
+		if (random <= (limit + bonus))
+			return true;
+
+		return false;
+	}
+	//the valuable method is meant for the gems etc. -> half bonus only
+	private Boolean ThrowDice (float limit, float bonus)
+	{
+		float random = Random.Range (0f, 100f);
+		if (random <= (limit + bonus))
+			return true;
+
+		return false;
 	}
 
 	//set up for the tiles after initialisation
@@ -172,7 +246,7 @@ public class BoardManager : MonoBehaviour
 	{
 		//setup outer wall around the grid
 		for (int x = -1; x < columns + 1; x++) {
-			for (int y = lowerLimit; y > higherLimit; y--) {
+			for (int y = lowerLimit; y >= higherLimit; y--) {
 				GameObject toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
 				if (gridPositions.Contains (new Vector3 (x, y, 0f))) {
 					//instantiate a gameobject with chosen prefab
@@ -190,8 +264,24 @@ public class BoardManager : MonoBehaviour
 					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity);
 					instance.transform.SetParent (boardHolder);
 					objects.Add (instance);
+				
 				}
 			}
+		}
+	}
+
+
+	//destroy old objects the player wont see anymore
+	private void DestroyOldObjects ()
+	{
+		if (rows < -15) {
+
+			for (int i = 0; i < 156; i++) {
+				Destroy (objects [i]);
+				objects.Remove (objects [i]);
+			}
+
+
 		}
 	}
 }

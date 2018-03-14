@@ -137,8 +137,7 @@ public class Player : MonoBehaviour
 				horizontal = 0;
 			if (horizontal != 0)
 				vertical = 0;
-	
-		
+
 			if (collision.gameObject.tag == CONSTANTS.RESOURCE) {
 				//what to do if the object is a tile - check if minable
 				float durationToWait;

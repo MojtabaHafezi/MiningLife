@@ -27,8 +27,13 @@ public class CONSTANTS
 	public const int MAXITEMS = 7;
 	public const string BACKPACK = "Backpack: ";
 	public const string WEALTH = "Wealth: ";
+	public const int TILESAHEAD = 5;
+	public const int TILESTOSPAWN = 5;
 
 	//Item names
+	public const string DIRT = "Dirt";
+	public const string STONE = "Stone";
+	public const string LAVA = "Lava";
 	public const string COAL = "Coal";
 	public const string IRON = "Iron";
 	public const string SILVER = "Silver";
@@ -38,6 +43,9 @@ public class CONSTANTS
 	public const string DIAMOND = "Diamond";
 
 	//Item ids
+	public const int DIRT_ID = 97;
+	public const int STONE_ID = 98;
+	public const int LAVA_ID = 99;
 	public const int COAL_ID = 0;
 	public const int IRON_ID = 1;
 	public const int SILVER_ID = 2;
@@ -45,6 +53,7 @@ public class CONSTANTS
 	public const int EMERALD_ID = 4;
 	public const int RUBY_ID = 5;
 	public const int DIAMOND_ID = 6;
+
 
 	public const string ERROR = "ERROR";
 

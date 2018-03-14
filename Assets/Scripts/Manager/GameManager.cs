@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
 	//Attributes for player
 	private GameObject player;
-	private float playerY;
+	private float playerY = 0;
 
 	public long currency { get; set; }
 
@@ -38,11 +38,15 @@ public class GameManager : MonoBehaviour
 	void Update ()
 	{
 		if (SceneManager.GetActiveScene ().name == CONSTANTS.MAINSCENE) {
-			if (player.transform.position.y < (playerY - 4)) {
-				playerY = player.transform.position.y;
-				boardManager.AddToList ();
+			if (player != null) {
+				if (player.transform.position.y < (playerY - CONSTANTS.TILESAHEAD)) {
+					playerY = player.transform.position.y;
+					boardManager.AddToList ();
+				}
 			}
 		}
+
+		
 	}
 
 	void OnLevelWasLoaded ()
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadGameScene ()
 	{
+		
 		SceneManager.LoadScene (CONSTANTS.MAINSCENE);
 	}
 
@@ -119,7 +124,7 @@ public class GameManager : MonoBehaviour
 		//TODO: load data for player
 		stamina = 100;
 		currency = 0;
-		efficiency = 0;
+		efficiency = 10;
 		inventory.LoadData ();
 	}
 
