@@ -41,15 +41,15 @@ public class BoardManager : MonoBehaviour
 	public GameObject[] ironTiles;
 	private Count ironCount = new Count (4, 8);
 	public GameObject[] silverTiles;
-	private Count silverCount = new Count (2, 6);
+	private Count silverCount = new Count (2, 7);
 	public GameObject[] goldTiles;
-	private Count goldCount = new Count (1, 4);
+	private Count goldCount = new Count (1, 5);
 	public GameObject[] emeraldTiles;
-	private Count emeraldCount = new Count (0, 3);
+	private Count emeraldCount = new Count (0, 4);
 	public GameObject[] rubyTiles;
-	private Count rubyCount = new Count (0, 2);
+	private Count rubyCount = new Count (0, 3);
 	public GameObject[] diamondTiles;
-	private Count diamondCount = new Count (0, 1);
+	private Count diamondCount = new Count (0, 2);
 
 
 
@@ -215,7 +215,7 @@ public class BoardManager : MonoBehaviour
 			InstantiateAtRandom (rubyTiles, rubyCount.minimum, rubyCount.maximum);
 		}
 
-		//Diamond: 0.5% 
+		//Diamond: 1% 
 		if (ThrowDiceValuable (0.5f, bonus)) {
 			InstantiateAtRandom (diamondTiles, diamondCount.minimum, diamondCount.maximum);
 		}
@@ -225,6 +225,9 @@ public class BoardManager : MonoBehaviour
 	private Boolean ThrowDiceValuable (float limit, float bonus)
 	{
 		float random = Random.Range (0f, 100f);
+		//if deep enough - cap the chance to 25%
+		if (bonus >= 25)
+			bonus = 25;
 		if (random <= (limit + bonus))
 			return true;
 
@@ -234,6 +237,9 @@ public class BoardManager : MonoBehaviour
 	private Boolean ThrowDice (float limit, float bonus)
 	{
 		float random = Random.Range (0f, 100f);
+		//if deep enough - spawn all tiles that are not worth too much
+		if (bonus >= 100)
+			return true;
 		if (random <= (limit + bonus))
 			return true;
 
@@ -247,7 +253,8 @@ public class BoardManager : MonoBehaviour
 		//setup outer wall around the grid
 		for (int x = -1; x < columns + 1; x++) {
 			for (int y = lowerLimit; y >= higherLimit; y--) {
-				GameObject toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
+				//decide upon the type of tile by looking at the depth ingame
+				GameObject toInstantiate = ToInstantiateTileType ();
 				if (gridPositions.Contains (new Vector3 (x, y, 0f))) {
 					//instantiate a gameobject with chosen prefab
 					GameObject instance = Instantiate (toInstantiate, new Vector3 (x, y, 0f), Quaternion.identity);
@@ -269,6 +276,21 @@ public class BoardManager : MonoBehaviour
 			}
 		}
 	}
+	//returns the game object to instantiate depending on the depth of the cave
+	// up to 100: dirt, from 100 to 200: stone, from 200+: red stone
+	private GameObject ToInstantiateTileType ()
+	{
+		GameObject toInstantiate = null;
+
+		toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
+		if (Mathf.Abs (rows) >= 100) {
+			toInstantiate = greyStoneTiles [Random.Range (0, greyStoneTiles.Length)];
+		} else if (Mathf.Abs (rows) >= 200) {
+			toInstantiate = redStoneTiles [Random.Range (0, redStoneTiles.Length)];
+		}
+
+		return toInstantiate;
+	}
 
 
 	//destroy old objects the player wont see anymore
@@ -276,12 +298,14 @@ public class BoardManager : MonoBehaviour
 	{
 		if (rows < -15) {
 
-			for (int i = 0; i < 156; i++) {
-				Destroy (objects [i]);
-				objects.Remove (objects [i]);
+			//destroy as many objects as are created per second -> tilesahead * columns
+			for (int i = 0; i < (CONSTANTS.TILESAHEAD * columns); i++) {
+				if (objects [i] != null) {
+					Destroy (objects [i]);
+					objects.Remove (objects [i]);
+				}
+
 			}
-
-
 		}
 	}
 }

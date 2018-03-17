@@ -33,6 +33,7 @@ public class CONSTANTS
 	//Item names
 	public const string DIRT = "Dirt";
 	public const string STONE = "Stone";
+	public const string REDSTONE = "RedStone";
 	public const string LAVA = "Lava";
 	public const string COAL = "Coal";
 	public const string IRON = "Iron";
@@ -43,6 +44,7 @@ public class CONSTANTS
 	public const string DIAMOND = "Diamond";
 
 	//Item ids
+	public const int REDSTONE_ID = 96;
 	public const int DIRT_ID = 97;
 	public const int STONE_ID = 98;
 	public const int LAVA_ID = 99;
