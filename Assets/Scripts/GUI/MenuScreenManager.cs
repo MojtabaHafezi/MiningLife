@@ -34,10 +34,10 @@ public class MenuScreenManager : MonoBehaviour
 
 	public void OpenStartScreen ()
 	{
-		//TODO:SAVE GAME
-		soundManager.PlayMenu ();
-		gameManager.SaveGameData ();
-		gameManager.LoadStartScene ();
+		SoundManager.instance.PlayMenu ();
+		GameManager.instance.SaveGameData ();
+		GameManager.instance.LoadStartScene ();
+	
 	}
 
 	void Start ()

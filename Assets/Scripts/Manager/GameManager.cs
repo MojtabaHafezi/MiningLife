@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	private GameObject player;
 	private float playerY = 0;
 
-	public long currency { get; set; }
+	public int currency { get; set; }
 
 	public int stamina{ get; set; }
 
@@ -28,11 +28,15 @@ public class GameManager : MonoBehaviour
 		else if (instance != this)
 			Destroy (gameObject);
 		DontDestroyOnLoad (gameObject);
+		inventory = new Inventory ();
 
+	}
+
+	void Start ()
+	{
 		boardManager = GetComponent<BoardManager> ();
-		inventory = new Inventory (CONSTANTS.MAXITEMS);
-		InitialiseGame ();
 		LoadGameData ();
+		InitialiseGame ();
 	}
 
 	void Update ()
@@ -45,8 +49,6 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
-
-		
 	}
 
 	void OnLevelWasLoaded ()
@@ -115,17 +117,17 @@ public class GameManager : MonoBehaviour
 	//TODO
 	public void SaveGameData ()
 	{
-		inventory.SaveData ();
+		SaveLoadManager.instance.SaveAllData ();
 	}
 
-	//TODO
 	public void LoadGameData ()
 	{
-		//TODO: load data for player
-		stamina = 100;
-		currency = 0;
-		efficiency = 10;
-		inventory.LoadData ();
+		SaveLoadManager.instance.LoadAllData ();
+	}
+
+	public void SetDefaultData ()
+	{
+		SaveLoadManager.instance.SetDefaultData ();
 	}
 
 

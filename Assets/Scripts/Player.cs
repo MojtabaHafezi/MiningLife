@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 	private bool isMining = false;
 
 	//Attributes for gameplay
-	public long currency { get; protected set; }
+	public int currency { get; protected set; }
 
 	public int stamina{ get; protected set; }
 

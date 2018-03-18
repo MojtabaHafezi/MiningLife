@@ -10,7 +10,7 @@ public class Inventory
 	public int currentTotal;
 
 
-	public Inventory (int maxItems)
+	public Inventory ()
 	{
 		itemList = new int[CONSTANTS.MAXITEMS];
 		LoadData ();
@@ -20,13 +20,33 @@ public class Inventory
 	//Persistence
 	public void LoadData ()
 	{
-		capacity = 20; //Load from saved data or default
-		currentTotal = 0;
+		capacity = PlayerPrefs.GetInt (CONSTANTS.CAPACITY, 20);
+		currentTotal = PlayerPrefs.GetInt (CONSTANTS.CURRENTTOTAL, 0);
+		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
+			itemList [i] = PlayerPrefs.GetInt (i + "", 0);
+		}
+
 	}
 
 	public void SaveData ()
 	{
-		
+		PlayerPrefs.SetInt (CONSTANTS.CURRENTTOTAL, currentTotal);
+		PlayerPrefs.SetInt (CONSTANTS.CAPACITY, capacity);
+		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
+			PlayerPrefs.SetInt (i + "", itemList [i]);
+		}
+
+		PlayerPrefs.Save ();
+	}
+
+	public void SetDefaultData ()
+	{
+		PlayerPrefs.SetInt (CONSTANTS.CURRENTTOTAL, 0);
+		PlayerPrefs.SetInt (CONSTANTS.CAPACITY, 20);
+		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
+			itemList [i] = 0;
+		}
+		PlayerPrefs.Save ();
 	}
 
 	public void ReduceFromList (int id)

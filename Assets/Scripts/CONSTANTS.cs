@@ -5,7 +5,14 @@ using UnityEngine;
 //used for saving shared preferences and checking for tags etc.
 public class CONSTANTS
 {
-
+	//Persistence
+	public const string AUDIO = "Audio";
+	public const string SOUND = "Sound";
+	public const string CAPACITY = "Capacity";
+	public const string STAMINA = "Stamina";
+	public const string CURRENCY = "Currency";
+	public const string EFFICIENCY = "Efficiency";
+	public const string CURRENTTOTAL = "CurrentTotal";
 
 	//Scenes
 	public const string MAINSCENE = "scene_main";

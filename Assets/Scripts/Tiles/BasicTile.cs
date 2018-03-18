@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class BasicTile: MonoBehaviour
 {
 
-	public long value { get; protected set; }
+	public int value { get; protected set; }
 
 	public int id { get; protected set; }
 
