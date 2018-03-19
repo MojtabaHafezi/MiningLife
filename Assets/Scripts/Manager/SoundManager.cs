@@ -16,18 +16,14 @@ public class SoundManager : MonoBehaviour
 	public Slider audioSlider;
 	public Slider soundSlider;
 	private GameManager gameManager;
-	public AudioSource audio;
-	public AudioSource sound;
+	public AudioSource audioSource;
+	public AudioSource soundSource;
+	private AudioSource[] sources;
 
 	public float soundVolume;
 	public float audioVolume;
-	
-
-
 	Random rand;
 
-	// for sound effects - need to know which source it is to change the clips
-	private AudioSource audioSource;
 
 	//Singleton pattern
 	public static SoundManager instance = null;
@@ -41,23 +37,39 @@ public class SoundManager : MonoBehaviour
 		else if (instance != this)
 			Destroy (gameObject);
 		DontDestroyOnLoad (gameObject);
+
 	}
 
 	void Start ()
 	{
-		sound.loop = false;
-		sound.playOnAwake = false;
-		audio.loop = true;
-		audio.playOnAwake = true;
+		//get the audioSource components and assign them to the private attributes
+		SetAudioSources ();
+
+		soundSource.enabled = true;
+		soundSource.loop = false;
+		soundSource.playOnAwake = false;
+		audioSource.enabled = true;
+		audioSource.loop = true;
+		audioSource.playOnAwake = true;
 		if (SceneManager.GetActiveScene ().name == CONSTANTS.STARTSCENE) {
 			audioSlider = GameObject.FindGameObjectWithTag (CONSTANTS.AUDIO).GetComponent<Slider> ();
 			soundSlider = GameObject.FindGameObjectWithTag (CONSTANTS.SOUND).GetComponent<Slider> ();
 
 		}
+		SaveLoadManager.instance.LoadVolumes ();
 	}
 
 	void OnLevelWasLoaded ()
 	{
+		SetAudioSources ();
+
+		soundSource.enabled = true;
+		soundSource.loop = false;
+		soundSource.playOnAwake = false;
+		audioSource.enabled = true;
+		audioSource.loop = true;
+		audioSource.playOnAwake = true;
+
 		if (SceneManager.GetActiveScene ().name == CONSTANTS.STARTSCENE) {
 			audioSlider = GameObject.FindGameObjectWithTag (CONSTANTS.AUDIO).GetComponent<Slider> ();
 			soundSlider = GameObject.FindGameObjectWithTag (CONSTANTS.SOUND).GetComponent<Slider> ();
@@ -66,84 +78,108 @@ public class SoundManager : MonoBehaviour
 
 	public void PlayFootstep ()
 	{
-		sound.loop = false;
+		SetAudioSources ();
+		soundSource.loop = false;
 		int choice = Random.Range (0, 1);
 		switch (choice) {
 		case 0:
-			sound.clip = walk1;
+			soundSource.clip = walk1;
 			break;
 		case 1:
-			sound.clip = walk2;
+			soundSource.clip = walk2;
 			break;
 		default:
 			break;
 		}
-		if (!sound.isPlaying) {
-			sound.Play ();
+		if (!soundSource.isPlaying) {
+			soundSource.Play ();
 		}
 	}
 
 	public void PlayDeath ()
 	{
-		sound.loop = false;
-		sound.clip = death;
-		if (!sound.isPlaying)
-			sound.Play ();
+		SetAudioSources ();
+		soundSource.loop = false;
+		soundSource.clip = death;
+		if (!soundSource.isPlaying)
+			soundSource.Play ();
 	}
 
 	public void PlayMine ()
 	{	
-		sound.loop = true;
+		SetAudioSources ();
+		soundSource.loop = true;
 		int choice = Random.Range (0, 2);
 		switch (choice) {
 		case 0:
-			sound.clip = mine4;
+			soundSource.clip = mine4;
 			break;
 		case 1:
-			sound.clip = mine3;
+			soundSource.clip = mine3;
 			break;
 		default:
 			break;
 		}
-		if (!sound.isPlaying) {
-			sound.Play ();
+		if (!soundSource.isPlaying) {
+			soundSource.Play ();
 		}
 	}
 
 	public void StopLoop ()
 	{
-		sound.loop = false;
+		SetAudioSources ();
+		soundSource.loop = false;
 	}
 
 	public void PlayMenu ()
 	{
-		sound.clip = menu;
-		if (!sound.isPlaying) {
-			sound.Play ();
+		SetAudioSources ();
+
+		soundSource.clip = menu;
+		if (!soundSource.isPlaying) {
+			if (soundSource.enabled)
+				soundSource.Play ();
 		}
 	}
 
 
 	public void LoadOptions ()
 	{
+		SetAudioSources ();
+
 		audioSlider = GameObject.FindGameObjectWithTag (CONSTANTS.AUDIO).GetComponent<Slider> ();
 		soundSlider = GameObject.FindGameObjectWithTag (CONSTANTS.SOUND).GetComponent<Slider> ();
 
-		GameManager.instance.LoadGameData ();
-		sound.volume = soundVolume;
+		SaveLoadManager.instance.LoadVolumes ();
+		soundSource.volume = soundVolume;
 		soundSlider.value = soundVolume;
-		audio.volume = audioVolume;
+		audioSource.volume = audioVolume;
 		audioSlider.value = audioVolume;
 	}
 
 	public void SaveOptions ()
 	{
-		sound.volume = soundSlider.value;
-		audio.volume = audioSlider.value;
+		SetAudioSources ();
+		float sound = soundSlider.value;
+		soundSource.volume = sound;
+		soundVolume = sound;
 
-		soundVolume = sound.volume;
-		audioVolume = audio.volume;
-		GameManager.instance.SaveGameData ();
+		soundSource.volume = soundSlider.value;
+		audioSource.volume = audioSlider.value;
+
+		soundVolume = soundSource.volume;
+		audioVolume = audioSource.volume;
+		SaveLoadManager.instance.SaveVolumes ();
+
+		LoadOptions ();
+	}
+
+	// Unity loses track of the audioSources upon loading new scenes
+	private void SetAudioSources ()
+	{
+		sources = GetComponentsInChildren<AudioSource> ();
+		audioSource = sources [0];
+		soundSource = sources [1];
 	}
 
 

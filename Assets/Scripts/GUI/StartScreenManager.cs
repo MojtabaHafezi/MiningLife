@@ -27,6 +27,7 @@ public class StartScreenManager : MonoBehaviour
 	private void SetButtonListeners ()
 	{
 		newGameButton.onClick.AddListener (soundManager.PlayMenu);
+		newGameButton.onClick.AddListener (gameManager.SetDefaultData);
 		newGameButton.onClick.AddListener (gameManager.LoadMenuScene);
 
 		loadGameButton.onClick.AddListener (soundManager.PlayMenu);
