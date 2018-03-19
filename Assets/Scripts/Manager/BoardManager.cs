@@ -285,7 +285,8 @@ public class BoardManager : MonoBehaviour
 		toInstantiate = floorTiles [Random.Range (0, floorTiles.Length)];
 		if (Mathf.Abs (rows) >= 100) {
 			toInstantiate = greyStoneTiles [Random.Range (0, greyStoneTiles.Length)];
-		} else if (Mathf.Abs (rows) >= 200) {
+		} 
+		if (Mathf.Abs (rows) >= 200) {
 			toInstantiate = redStoneTiles [Random.Range (0, redStoneTiles.Length)];
 		}
 
