@@ -126,6 +126,9 @@ public class SoundManager : MonoBehaviour
 
 	public void LoadOptions ()
 	{
+		audioSlider = GameObject.FindGameObjectWithTag (CONSTANTS.AUDIO).GetComponent<Slider> ();
+		soundSlider = GameObject.FindGameObjectWithTag (CONSTANTS.SOUND).GetComponent<Slider> ();
+
 		GameManager.instance.LoadGameData ();
 		sound.volume = soundVolume;
 		soundSlider.value = soundVolume;
