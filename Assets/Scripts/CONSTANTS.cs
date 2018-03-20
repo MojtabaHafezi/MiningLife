@@ -35,10 +35,12 @@ public class CONSTANTS
 	public const int MAXITEMS = 7;
 	public const string BACKPACK = "Backpack: ";
 	public const string WEALTH = "Wealth: ";
+	public const string NEWWEALTH = "New wealth: ";
 	public const int TILESAHEAD = 5;
 	public const int TILESTOSPAWN = 5;
 	public const string PRICE = "Price: ";
 	public const int PICKAXES = 5;
+	public const int EXPENSES = 30;
 
 	public const int BRONZE_PICK = 100;
 	public const int IRON_PICK = 250;

@@ -225,9 +225,10 @@ public class Player : MonoBehaviour
 				gameManager.stamina = this.stamina;
 				
 			} else {
-				//TODO: STAMINA IS OUT -> TELEPORT TO CITY, SHOW COSTS
+				GameManager.instance.PayandRecover ();
+				GameManager.instance.ExitFromCave ();
+				GameManager.instance.LoadMenuScene ();
 			}
-		
 		}
 
 	}

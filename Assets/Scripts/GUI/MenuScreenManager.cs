@@ -11,6 +11,8 @@ public class MenuScreenManager : MonoBehaviour
 	public Button guildButton;
 	public Button caveButton;
 	public Button exitButton;
+	public GameObject expensesPanel;
+	public bool showPanel = false;
 	private SoundManager soundManager;
 	private GameManager gameManager;
 
@@ -40,6 +42,8 @@ public class MenuScreenManager : MonoBehaviour
 	
 	}
 
+
+
 	void Start ()
 	{
 		gameManager = GameManager.instance;
@@ -49,6 +53,8 @@ public class MenuScreenManager : MonoBehaviour
 		soundManager = GameObject.Find ("SoundManager").GetComponent<SoundManager> ();
 		*/
 		SetButtonListeners ();
+		showPanel = GameManager.instance.exitFromCave;
+		expensesPanel.gameObject.SetActive (showPanel);
 	}
 
 	private void SetButtonListeners ()
@@ -58,5 +64,15 @@ public class MenuScreenManager : MonoBehaviour
 		caveButton.onClick.AddListener (OpenMainScene);
 		exitButton.onClick.AddListener (OpenStartScreen);
 	}
+
+	public void SetPanelState ()
+	{
+		GameManager.instance.ExitFromCave ();
+		showPanel = !showPanel;
+		expensesPanel.gameObject.SetActive (showPanel);
+
+	}
+
+
 		
 }

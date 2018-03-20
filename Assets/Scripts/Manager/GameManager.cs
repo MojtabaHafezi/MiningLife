@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
 	public int maxStamina{ get; set; }
 
+	public bool exitFromCave = false;
+
 	private BoardManager boardManager;
 	public Inventory inventory;
 
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
 			Destroy (gameObject);
 		DontDestroyOnLoad (gameObject);
 		inventory = new Inventory ();
-
+		exitFromCave = false;
 	}
 
 	void Start ()
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
 		boardManager = GetComponent<BoardManager> ();
 		LoadGameData ();
 		InitialiseGame ();
+	
 	}
 
 	void Update ()
@@ -61,6 +64,7 @@ public class GameManager : MonoBehaviour
 	private void InitialiseGame ()
 	{
 		if (SceneManager.GetActiveScene ().name == CONSTANTS.MAINSCENE) {
+			exitFromCave = false;
 			instance.boardManager.Initialise ();
 			player = GameObject.FindGameObjectWithTag (CONSTANTS.PLAYER);
 			playerY = player.transform.position.y;
@@ -132,5 +136,17 @@ public class GameManager : MonoBehaviour
 		SaveLoadManager.instance.SetDefaultData ();
 	}
 
+	public void ExitFromCave ()
+	{
+		GameManager.instance.exitFromCave = !GameManager.instance.exitFromCave;
+	}
+
+	//Reduces the currency by expenses, resets stamina and saves data
+	public void PayandRecover ()
+	{
+		GameManager.instance.stamina = GameManager.instance.maxStamina;
+		GameManager.instance.currency -= CONSTANTS.EXPENSES;
+		GameManager.instance.SaveGameData ();
+	}
 
 }
