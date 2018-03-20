@@ -15,4 +15,10 @@ public class TileSilver : BasicTile
 		id = CONSTANTS.SILVER_ID;
 		name = CONSTANTS.SILVER;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
+
 }

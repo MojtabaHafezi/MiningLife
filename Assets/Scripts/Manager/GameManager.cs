@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
 	public int efficiency { get; set; }
 
+	public int maxStamina{ get; set; }
+
 	private BoardManager boardManager;
 	public Inventory inventory;
 

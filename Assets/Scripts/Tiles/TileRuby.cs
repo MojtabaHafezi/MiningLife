@@ -15,4 +15,9 @@ public class TileRuby : BasicTile
 		id = CONSTANTS.RUBY_ID;
 		name = CONSTANTS.RUBY;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
 }

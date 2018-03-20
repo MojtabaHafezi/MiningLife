@@ -15,4 +15,9 @@ public class TileRedStone : BasicTile
 		id = CONSTANTS.REDSTONE_ID;
 		name = CONSTANTS.REDSTONE;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
 }

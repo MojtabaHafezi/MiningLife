@@ -40,6 +40,8 @@ public class Inventory
 
 	public void SetDefaultData ()
 	{
+		capacity = 20;
+		currentTotal = 0;
 		PlayerPrefs.SetInt (CONSTANTS.CURRENTTOTAL, 0);
 		PlayerPrefs.SetInt (CONSTANTS.CAPACITY, 20);
 		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
@@ -48,21 +50,26 @@ public class Inventory
 		PlayerPrefs.Save ();
 	}
 
-	public void ReduceFromList (int id)
+	public bool ReduceFromList (int id)
 	{
 		if (itemList [id] > 0) {
 			itemList [id] -= 1;
 			currentTotal -= 1;
 			SaveData ();
+			return true;
 		}
+		return false;
 
 	}
 
-	public void ReduceCompleteFromList (int id)
+	public int ReduceCompleteFromList (int id)
 	{
+		int counter = 0;
 		currentTotal -= itemList [id];
+		counter += itemList [id];
 		itemList [id] = 0;
 		SaveData ();
+		return counter;
 	}
 
 	public void AddToList (int id)

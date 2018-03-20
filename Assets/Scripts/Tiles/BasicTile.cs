@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class BasicTile: MonoBehaviour
+public abstract class BasicTile: MonoBehaviour
 {
 
 	public int value { get; protected set; }
@@ -34,5 +34,8 @@ public class BasicTile: MonoBehaviour
 
 		return duration;
 	}
+
+	public abstract int GetValue ();
+
 		
 }

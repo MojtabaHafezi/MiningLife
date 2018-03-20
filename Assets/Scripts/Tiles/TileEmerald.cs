@@ -15,4 +15,9 @@ public class TileEmerald: BasicTile
 		id = CONSTANTS.EMERALD_ID;
 		name = CONSTANTS.EMERALD;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
 }

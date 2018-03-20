@@ -15,4 +15,10 @@ public class TileDiamond : BasicTile
 		id = CONSTANTS.DIAMOND_ID;
 		name = CONSTANTS.DIAMOND;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
+
 }

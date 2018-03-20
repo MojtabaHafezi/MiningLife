@@ -5,7 +5,7 @@ using UnityEngine;
 public class TileCoal: BasicTile
 {
 
-	void Start ()
+	void Awake ()
 	{
 		value = 5;
 		health = Random.Range (2, 6);
@@ -14,5 +14,13 @@ public class TileCoal: BasicTile
 		maxTime = 2f;
 		id = CONSTANTS.COAL_ID;
 		name = CONSTANTS.COAL;
+
 	}
+
+
+	public override int GetValue ()
+	{
+		return value;
+	}
+
 }

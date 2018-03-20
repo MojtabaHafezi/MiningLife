@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class ContentFiller : MonoBehaviour
+public class ContentFillerShop : MonoBehaviour
 {
+
 	//Prefab to be initialised in the content for the scrollview
 	public GameObject itemPanel;
 	//Text for the backpack capacity and amount of currency
@@ -17,7 +17,11 @@ public class ContentFiller : MonoBehaviour
 	public Text[] texts = new Text[CONSTANTS.MAXITEMS];
 	//List of button array: Since the itemPanel has 2 buttons in it with 2 different
 	//methods - this was implemented. See the SetBUttonListener for more details
-	private List<Button[]> dropButtons = new List<Button[]> (CONSTANTS.MAXITEMS);
+	private List<Button[]> sellButtons = new List<Button[]> (CONSTANTS.MAXITEMS);
+
+	//Array of scripts for each resource's value.
+	public GameObject[] basicTiles;
+
 
 
 
@@ -48,9 +52,9 @@ public class ContentFiller : MonoBehaviour
 			Text text = panel.GetComponentInChildren<Text> ();
 			texts [i] = text;
 			text.text = CONSTANTS.ReturnNameForId (i);
-			text.text += ": " + gameManager.inventory.itemList [i];
+			text.text += CONSTANTS.ReturnNameForId (i) + ": " + gameManager.inventory.itemList [i] + " / " + CONSTANTS.PRICE + GetValueForId (i);
 			Button[] buttons = panel.GetComponentsInChildren<Button> ();
-			dropButtons.Add (buttons);
+			sellButtons.Add (buttons);
 		}
 		capacityText.text = CONSTANTS.BACKPACK + GameManager.instance.inventory.currentTotal + " / " + GameManager.instance.inventory.capacity;
 		currencyText.text = CONSTANTS.WEALTH + GameManager.instance.currency;
@@ -64,12 +68,12 @@ public class ContentFiller : MonoBehaviour
 	{
 		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
 			int id = ReturnConstId (i);
-			Button[] buttons = dropButtons [i];
+			Button[] buttons = sellButtons [i];
 			buttons [0].onClick.AddListener (delegate {
-				DropItem (id);
+				SellItem (id);
 			});
 			buttons [1].onClick.AddListener (delegate {
-				DropAllItems (id);
+				SellAllItems (id);
 			});
 		}
 	}
@@ -101,25 +105,43 @@ public class ContentFiller : MonoBehaviour
 	public void UpdatePanels ()
 	{
 		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
-			texts [i].text = CONSTANTS.ReturnNameForId (i) + ": " + gameManager.inventory.itemList [i];
+			texts [i].text = CONSTANTS.ReturnNameForId (i) + ": " + gameManager.inventory.itemList [i] + " / " + CONSTANTS.PRICE + GetValueForId (i);
 		}
 		capacityText.text = CONSTANTS.BACKPACK + gameManager.inventory.currentTotal + " / " + gameManager.inventory.capacity;
 		currencyText.text = CONSTANTS.WEALTH + GameManager.instance.currency;
 	}
 
-	public void DropItem (int id)
+	public void SellItem (int id)
 	{
-		gameManager.inventory.ReduceFromList (id);
-		gameManager.inventory.SaveData ();
-		UpdatePanels ();
+		if (gameManager.inventory.ReduceFromList (id)) {
+			GameManager.instance.currency += GetValueForId (id);
+			GameManager.instance.SaveGameData ();
+			UpdatePanels ();
+		}
+
 	}
 
-	public void DropAllItems (int id)
+	public void SellAllItems (int id)
 	{
 
-		gameManager.inventory.ReduceCompleteFromList (id);
-		gameManager.inventory.SaveData ();
-		UpdatePanels ();
+		int count = 0;
+		count = gameManager.inventory.ReduceCompleteFromList (id);
+		if (count > 0) {
+			GameManager.instance.currency += (count * GetValueForId (id));
+			GameManager.instance.SaveGameData ();
+			UpdatePanels ();
+		}
+
+	
+	}
+
+
+	public  int GetValueForId (int id)
+	{
+		int value;
+		value = basicTiles [id].gameObject.GetComponent<BasicTile> ().GetValue ();
+		return value;
+
 	}
 
 }

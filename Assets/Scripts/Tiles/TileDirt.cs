@@ -15,5 +15,10 @@ public class TileDirt : BasicTile
 		maxTime = 1f;
 	}
 
+	public override int GetValue ()
+	{
+		return value;
+	}
+
 
 }

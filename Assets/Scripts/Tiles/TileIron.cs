@@ -15,4 +15,9 @@ public class TileIron : BasicTile
 		id = CONSTANTS.IRON_ID;
 		name = CONSTANTS.IRON;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
 }

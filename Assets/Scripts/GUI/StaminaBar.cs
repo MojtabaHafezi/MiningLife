@@ -13,9 +13,10 @@ public class StaminaBar : MonoBehaviour
 	{
 		gameManager = GameManager.instance;
 		staminaSlider = GetComponent<Slider> ();
-		staminaSlider.maxValue = gameManager.stamina;
+		staminaSlider.maxValue = gameManager.maxStamina;
 		staminaSlider.minValue = 0;
-		staminaSlider.value = staminaSlider.maxValue;
+		staminaSlider.value = gameManager.stamina;
+
 
 	}
 

@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
 		facingRight = true;
 		isFalling = false;
 
-		//TODO: LOAD DATA
 		stamina = gameManager.stamina;
 		currency = gameManager.currency;
 		efficiency = gameManager.efficiency;
@@ -235,18 +234,12 @@ public class Player : MonoBehaviour
 
 	private void AddToInventory (Collision2D collision)
 	{
-		//TODO: ADD TO INVENTORY
-
 		gameManager.inventory.AddToList (collision.gameObject.GetComponent<BasicTile> ().id);
-		Debug.Log (gameManager.inventory.ToString ());
-	
-
 	}
 
 	IEnumerator WaitForTime (Collision2D collision, float time)
 	{
-		Debug.Log ("Stamina: " + stamina);
-		Debug.Log ("Time to mine: " + time);
+
 		//TODO: animation etc.
 
 		//Play sound and stop animations
@@ -264,6 +257,14 @@ public class Player : MonoBehaviour
 	IEnumerator WaitForTime (float time)
 	{
 		yield return new WaitForSeconds (time);
+	}
+
+	public void ExitCaves ()
+	{
+		//TODO:
+		//Living costs
+		//Refill stamina
+
 	}
 		
 }

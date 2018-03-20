@@ -9,6 +9,7 @@ public class CONSTANTS
 	public const string AUDIO = "Audio";
 	public const string SOUND = "Sound";
 	public const string CAPACITY = "Capacity";
+	public const string MAXSTAMINA = "MaxStamina";
 	public const string STAMINA = "Stamina";
 	public const string CURRENCY = "Currency";
 	public const string EFFICIENCY = "Efficiency";
@@ -36,6 +37,29 @@ public class CONSTANTS
 	public const string WEALTH = "Wealth: ";
 	public const int TILESAHEAD = 5;
 	public const int TILESTOSPAWN = 5;
+	public const string PRICE = "Price: ";
+	public const int PICKAXES = 5;
+
+	public const int BRONZE_PICK = 100;
+	public const int IRON_PICK = 250;
+	public const int SILVER_PICK = 500;
+	public const int GOLD_PICK = 1000;
+	public const int DIAMOND_PICK = 10000;
+
+	public const int BRONZE_EFF = 2;
+	public const int IRON_EFF = 3;
+	public const int SILVER_EFF = 4;
+	public const int GOLD_EFF = 6;
+	public const int DIAMOND_EFF = 8;
+
+	public const int BRONZE_STA = 110;
+	public const int IRON_STA = 130;
+	public const int SILVER_STA = 150;
+	public const int GOLD_STA = 200;
+	public const int DIAMOND_STA = 350;
+
+
+
 
 	//Item names
 	public const string DIRT = "Dirt";

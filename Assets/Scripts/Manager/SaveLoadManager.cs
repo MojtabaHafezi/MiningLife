@@ -22,31 +22,30 @@ public  class SaveLoadManager : MonoBehaviour
 
 	public void SetDefaultData ()
 	{
-		
 		GameManager.instance.inventory.SetDefaultData ();
+		PlayerPrefs.SetInt (CONSTANTS.MAXSTAMINA, 100);
 		PlayerPrefs.SetInt (CONSTANTS.STAMINA, 100);
 		PlayerPrefs.SetInt (CONSTANTS.CURRENCY, 50);
 		PlayerPrefs.SetInt (CONSTANTS.EFFICIENCY, 1);
+		LoadAllData ();
 		PlayerPrefs.Save ();
 	}
 
 	public void SaveAllData ()
 	{
 		
-		
 		GameManager.instance.inventory.SaveData ();
+		PlayerPrefs.SetInt (CONSTANTS.MAXSTAMINA, GameManager.instance.maxStamina);
 		PlayerPrefs.SetInt (CONSTANTS.STAMINA, GameManager.instance.stamina);
 		PlayerPrefs.SetInt (CONSTANTS.CURRENCY, GameManager.instance.currency);
 		PlayerPrefs.SetInt (CONSTANTS.EFFICIENCY, GameManager.instance.efficiency);
-	
-
 		PlayerPrefs.Save ();
 	}
 
 	public void LoadAllData ()
 	{
-		
 		GameManager.instance.inventory.LoadData ();
+		GameManager.instance.maxStamina = PlayerPrefs.GetInt (CONSTANTS.MAXSTAMINA, 100);
 		GameManager.instance.stamina = PlayerPrefs.GetInt (CONSTANTS.STAMINA, 100);
 		GameManager.instance.currency = PlayerPrefs.GetInt (CONSTANTS.CURRENCY, 50);
 		GameManager.instance.efficiency = PlayerPrefs.GetInt (CONSTANTS.EFFICIENCY, 1);

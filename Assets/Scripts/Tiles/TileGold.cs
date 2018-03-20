@@ -15,4 +15,9 @@ public class TileGold : BasicTile
 		id = CONSTANTS.GOLD_ID;
 		name = CONSTANTS.GOLD;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
 }

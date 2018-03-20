@@ -15,4 +15,9 @@ public class TileLava: BasicTile
 		id = CONSTANTS.LAVA_ID;
 		name = CONSTANTS.LAVA;
 	}
+
+	public override int GetValue ()
+	{
+		return value;
+	}
 }
