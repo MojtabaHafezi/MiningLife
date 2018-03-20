@@ -17,7 +17,6 @@ public class ShopBuyScript : MonoBehaviour
 	public void UpdateText ()
 	{
 		text.text = CONSTANTS.WEALTH + GameManager.instance.currency;
-		Debug.Log (CONSTANTS.WEALTH + GameManager.instance.currency);
 	}
 
 	//if player has enough money the transaction is done immediately

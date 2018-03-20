@@ -55,8 +55,11 @@ public class Inventory
 		if (itemList [id] > 0) {
 			itemList [id] -= 1;
 			currentTotal -= 1;
+			if (currentTotal < 0)
+				currentTotal = 0;
 			SaveData ();
 			return true;
+
 		}
 		return false;
 
