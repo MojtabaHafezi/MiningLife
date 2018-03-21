@@ -56,6 +56,7 @@ public class SoundManager : MonoBehaviour
 			SoundManager.instance.soundSlider = GameObject.FindGameObjectWithTag (CONSTANTS.SOUND).GetComponent<Slider> ();
 		}
 		SaveLoadManager.instance.LoadVolumes ();
+		SoundManager.instance.LoadOptions ();
 	}
 
 	void OnLevelWasLoaded ()

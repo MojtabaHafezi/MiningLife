@@ -40,7 +40,13 @@ public class CONSTANTS
 	public const int TILESTOSPAWN = 5;
 	public const string PRICE = "Price: ";
 	public const int PICKAXES = 5;
-	public const int EXPENSES = 30;
+	public const int EXPENSES = 40;
+
+	//Guild scene fields
+	public const string CURRENTTASK = "Current task: ";
+	public const string REWARD = "Guild reward: ";
+	public const string DEPTH = "Reach a depth of: ";
+
 
 	public const int BRONZE_PICK = 100;
 	public const int IRON_PICK = 250;

@@ -26,7 +26,7 @@ public  class SaveLoadManager : MonoBehaviour
 		PlayerPrefs.SetInt (CONSTANTS.MAXSTAMINA, 100);
 		PlayerPrefs.SetInt (CONSTANTS.STAMINA, 100);
 		PlayerPrefs.SetInt (CONSTANTS.CURRENCY, 50);
-		PlayerPrefs.SetInt (CONSTANTS.EFFICIENCY, 10);
+		PlayerPrefs.SetInt (CONSTANTS.EFFICIENCY, 1);
 		LoadAllData ();
 		PlayerPrefs.Save ();
 	}

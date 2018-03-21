@@ -46,6 +46,7 @@ public class Inventory
 		PlayerPrefs.SetInt (CONSTANTS.CAPACITY, 20);
 		for (int i = 0; i < CONSTANTS.MAXITEMS; i++) {
 			itemList [i] = 0;
+			PlayerPrefs.SetInt (i + "", itemList [i]);
 		}
 		PlayerPrefs.Save ();
 	}
