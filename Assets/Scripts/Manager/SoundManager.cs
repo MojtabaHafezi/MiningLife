@@ -174,7 +174,7 @@ public class SoundManager : MonoBehaviour
 	// Unity loses track of the audioSources upon loading new scenes
 	private void SetAudioSources ()
 	{
-		SoundManager.instance.sources = GetComponentsInChildren<AudioSource> ();
+		SoundManager.instance.sources = SoundManager.instance.gameObject.GetComponentsInChildren<AudioSource> ();
 		SoundManager.instance.audioSource = SoundManager.instance.sources [0];
 		SoundManager.instance.soundSource = SoundManager.instance.sources [1];
 	}
