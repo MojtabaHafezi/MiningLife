@@ -293,6 +293,8 @@ public class Player : MonoBehaviour
 		yield return new WaitForSeconds (time);
 		//after the time stop mining
 		animator.SetBool ("mine", false);
+		particleRight.Stop ();
+		particleDown.Stop ();
 		collision.gameObject.SetActive (false);
 		isMining = false;
 		soundManager.StopLoop ();
