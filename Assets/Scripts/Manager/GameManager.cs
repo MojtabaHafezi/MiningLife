@@ -127,7 +127,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	//TODO
 	public void SaveGameData ()
 	{
 		SaveLoadManager.instance.SaveAllData ();

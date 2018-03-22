@@ -303,12 +303,5 @@ public class Player : MonoBehaviour
 		yield return new WaitForSeconds (time);
 	}
 
-	public void ExitCaves ()
-	{
-		//TODO:
-		//Living costs
-		//Refill stamina
 
-	}
-		
 }

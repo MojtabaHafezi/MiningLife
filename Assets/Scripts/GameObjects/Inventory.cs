@@ -82,8 +82,6 @@ public class Inventory
 			itemList [id] += 1;
 			currentTotal += 1;
 			SaveData ();
-		} else {
-			Debug.Log ("SHOW GUI: NOSPACE IN BACKPACK");
 		}
 	}
 
