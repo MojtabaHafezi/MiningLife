@@ -1,7 +1,7 @@
 # MiningLife
 This unity project was created for my module "Computer Games Development" in MSc. Computer Games Systems at the Nottingham Trent University.
-The code provided is by no means perfect and has many design problems. The main task was to create an aspect of a game within a specific time frame
-and I just had to finish the procedural generated level to a complete game.
+The code provided is by no means perfect. The main task was to create an aspect of a game within a specific time frame
+and I just had to implement the procedural generated level even though it meant more complexity.
 
 Tasks:
 1.	You are required to identify, research and plan a game prototype, and document this process in a Specification Document.
